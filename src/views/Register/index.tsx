@@ -77,7 +77,7 @@ const Register = () => {
         <TouchableOpacity
           style={[
             styles.registerButton,
-            !agreed && { opacity: 0.5 }
+            !agreed && { opacity: 0.5 },
           ]}
           disabled={!agreed}
         >

@@ -14,6 +14,9 @@ const Home = () => {
       <Button
         onPressIn={() => navigation.navigate('Login')}
       >Go to Login</Button>
+      <Button
+        onPressIn={() => navigation.navigate('BrainLogin')}
+      >Go to BrainLogin</Button>
     </View>
   );
 };
