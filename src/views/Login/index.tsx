@@ -10,7 +10,6 @@ const Login = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
-
       {/* 返回按钮 */}
       <TouchableOpacity
         style={styles.backButton}

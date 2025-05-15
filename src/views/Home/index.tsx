@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App';
 const Home = () => {
   const navigation = useNavigation<HomeNavigationProps>();
-
   return (
     <View style={style.container}>
       <Text style={style.h1}>Home</Text>
