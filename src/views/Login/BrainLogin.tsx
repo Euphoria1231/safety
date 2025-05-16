@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, StatusBar, Alert } from 'react-native';
+import { TouchableOpacity, SafeAreaView, StatusBar, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App';
 import styles from './BrainLogin.css';
 import { DocumentPickerResponse, pick } from '@react-native-documents/picker';
 
-
-const BrainLogin = () => {
+import { View, Text } from '@ant-design/react-native';
+const BrainLogin: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
   const [fileInfo, setFileInfo] = useState<DocumentPickerResponse | null>(null);
   const [authenticating, setAuthenticating] = useState(false);

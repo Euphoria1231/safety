@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
+import { TextInput, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App';
 import styles from './index.css';
-
-const Register = () => {
+import { View, Text } from '@ant-design/react-native';
+const Register: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
   const [agreed, setAgreed] = useState(false);
 

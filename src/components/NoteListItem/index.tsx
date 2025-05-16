@@ -1,9 +1,10 @@
 import { Icon } from '@ant-design/react-native';
-import { TouchableOpacity, View, Image, Text } from 'react-native';
-import { BackToItemProps } from '../BackToItem';
+import { TouchableOpacity, Image } from 'react-native';
+import { View, Text } from '@ant-design/react-native';
 import styles from './index.css';
+import { HomeListItemProps } from '../BackToItem';
 
-const NoteListItem: React.FC<BackToItemProps> = ({ title, imageUrl }) => {
+const NoteListItem: React.FC<HomeListItemProps> = ({ title, imageUrl }) => {
   return (
     <TouchableOpacity
       style={styles.noteListItemContainer}

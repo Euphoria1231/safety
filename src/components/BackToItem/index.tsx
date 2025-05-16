@@ -1,11 +1,12 @@
-import { TouchableOpacity, View, Image, Text } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
+import { View, Text } from '@ant-design/react-native';
 import styles from './index.css';
 
-export interface BackToItemProps {
+export interface HomeListItemProps {
   title: string,
   imageUrl: string
 }
-const BackToItem: React.FC<BackToItemProps> = ({
+const BackToItem: React.FC<HomeListItemProps> = ({
   title,
   imageUrl,
 }) => {

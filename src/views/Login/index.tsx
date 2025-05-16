@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
+import { TextInput, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
+import { View, Text } from '@ant-design/react-native';
 import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App';
 import styles from './index.css';
 
-const Login = () => {
+const Login: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
 
   return (

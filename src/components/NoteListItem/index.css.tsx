@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   noteListItemText: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: 500,
   },
 });
 

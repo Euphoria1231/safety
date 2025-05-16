@@ -1,14 +1,11 @@
-import { FlatList, Image, SafeAreaView, StatusBar, Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { HomeNavigationProps } from '../../types/App';
+import { FlatList, Image, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import styles from './index.css';
-import { Icon, View } from '@ant-design/react-native';
+import { View, Text } from '@ant-design/react-native';
 import React from 'react';
-import BackToItem, { BackToItemProps } from '../../components/BackToItem';
+import BackToItem, { HomeListItemProps } from '../../components/BackToItem';
 import NoteListItem from '../../components/NoteListItem';
-const Home = () => {
-  const navigation = useNavigation<HomeNavigationProps>();
-  const mockBackToData: BackToItemProps[] = [
+const Home: React.FC = () => {
+  const mockBackToData: HomeListItemProps[] = [
     {
       title: '大二下工作安排',
       imageUrl: '../../assets/images/avatar.jpg',
@@ -79,31 +76,6 @@ const Home = () => {
               contentContainerStyle={styles.noteListWrapper}
             />
           </View>
-        </View>
-
-        {/* 底部导航栏 */}
-        <View style={styles.footerContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Icon
-              name="home"
-              style={styles.footerIconStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('BrainLogin')}>
-            <Icon
-              name="search"
-              style={styles.footerIconStyle} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Icon
-              name="edit"
-              style={styles.footerIconStyle} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-            <Icon
-              name="user"
-              style={styles.footerIconStyle} />
-          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
