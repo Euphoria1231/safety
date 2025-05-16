@@ -23,30 +23,6 @@ const BrainLogin = () => {
         {
           text: '选择文件',
           onPress: async () => {
-            // // 模拟文件选择结果
-            // const mockFiles = [
-            //   { name: 'brainwave_20240601.eeg', size: 1024 * 512, type: 'application/octet-stream' },
-            //   { name: 'brainwave_20240528.eeg', size: 1024 * 1024, type: 'application/octet-stream' },
-            //   { name: 'brainwave_20240515.eeg', size: 1024 * 768, type: 'application/octet-stream' }
-            // ];
-
-            // // 二级选择菜单
-            // Alert.alert(
-            //   '可用脑波文件',
-            //   '请选择一个文件',
-            //   [
-            //     ...mockFiles.map((file, _) => ({
-            //       text: `${file.name} (${Math.round(file.size / 1024)}KB)`,
-            //       onPress: () => {
-            //         setFileInfo({
-            //           ...file,
-            //           uri: `file://mock/${file.name}`
-            //         });
-            //       }
-            //     })),
-            //     { text: '取消', style: 'cancel' }
-            //   ]
-            // );
             try {
               const [pickResult] = await pick();
               setFileInfo(pickResult);
