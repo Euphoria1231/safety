@@ -4,25 +4,54 @@ import { View, Text } from '@ant-design/react-native';
 import React from 'react';
 import BackToItem, { HomeListItemProps } from '../../components/BackToItem';
 import NoteListItem from '../../components/NoteListItem';
+
 const Home: React.FC = () => {
   const mockBackToData: HomeListItemProps[] = [
     {
       title: '大二下工作安排',
       imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1001',
     },
     {
-      title: '大二下工作安排',
+      title: '计算机设计大赛',
       imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1002',
     },
     {
-      title: '大二下工作安排',
+      title: '服务外包比赛',
       imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1003',
     },
     {
-      title: '大二下工作安排',
-      imageUrl: 'require("../../assets/images/avatar.jpg")',
+      title: '学习计划安排',
+      imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1004',
     },
   ];
+
+  const mockNoteData: HomeListItemProps[] = [
+    {
+      title: '大二下工作安排',
+      imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1001',
+    },
+    {
+      title: '计算机设计大赛',
+      imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1002',
+    },
+    {
+      title: '服务外包比赛',
+      imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1003',
+    },
+    {
+      title: '学习计划安排',
+      imageUrl: '../../assets/images/avatar.jpg',
+      articleId: '1004',
+    },
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
@@ -58,6 +87,7 @@ const Home: React.FC = () => {
                 <BackToItem
                   title={item.title}
                   imageUrl={item.imageUrl}
+                  articleId={item.articleId}
                 />
               }
             />
@@ -67,11 +97,12 @@ const Home: React.FC = () => {
               <Text style={styles.titleText} >笔记列表</Text>
             </View>
             <FlatList
-              data={mockBackToData}
+              data={mockNoteData}
               renderItem={({ item }) =>
                 <NoteListItem
                   title={item.title}
                   imageUrl={item.imageUrl}
+                  articleId={item.articleId}
                 />}
               contentContainerStyle={styles.noteListWrapper}
             />

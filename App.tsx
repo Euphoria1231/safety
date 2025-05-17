@@ -9,6 +9,7 @@ import BrainLogin from './src/views/Login/BrainLogin';
 import Edit from './src/views/Edit';
 import User from './src/views/User';
 import Search from './src/views/Search';
+import Article from './src/views/Article';
 import { Icon } from '@ant-design/react-native';
 
 const Stack = createNativeStackNavigator();
@@ -91,6 +92,10 @@ const RootStack = () => {
       <Stack.Screen
         name="Login"
         component={Login}
+      />
+      <Stack.Screen
+        name="Article"
+        component={Article}
       />
     </Stack.Navigator>
   );

@@ -7,6 +7,17 @@ export type RootStackPropsList = {
   Register: undefined;
   Login: undefined;
   BrainLogin: undefined;
+  Article: {
+    articleId: string;
+    title?: string;
+    content?: string;
+    author?: {
+      name: string;
+      avatar: string;
+    };
+    coverImage?: string;
+    date?: string;
+  };
 }
 
 export type TabPropsList = {
