@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   SeachNoteListItemUnitText: {
-    fontWeight: 'bold',
+    fontWeight: 500,
   },
 });
 
