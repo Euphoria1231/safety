@@ -1,9 +1,14 @@
-import { StatusBar, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, TouchableOpacity} from 'react-native';
+import { StatusBar, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, TouchableOpacity } from 'react-native';
 import styles from './index.css';
 import { Icon, Input, View } from '@ant-design/react-native';
 import SearchNoteList, { SearchNoteListItemProps } from '../../components/SearchNoteListItem';
+import React from 'react';
+import useAuthGuard from '../../hooks/useAuthGuard';
 
 const Search: React.FC = () => {
+  // 调用认证守卫钩子
+  useAuthGuard();
+
   const DateStrToDate = (theDateStr: string) => {
     const date = new Date(theDateStr);
     const nowDate = new Date();

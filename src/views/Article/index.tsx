@@ -2,6 +2,7 @@ import { SafeAreaView, StatusBar, ScrollView, Text, Image } from 'react-native';
 import styles from './index.css';
 import { View } from '@ant-design/react-native';
 import React, { useEffect, useState } from 'react';
+import useAuthGuard from '../../hooks/useAuthGuard';
 
 interface ArticleProps {
   route?: {
@@ -19,6 +20,9 @@ interface ArticleProps {
 }
 
 const Article: React.FC<ArticleProps> = ({ route }) => {
+  // 调用认证守卫钩子
+  useAuthGuard();
+
   const [articleData, setArticleData] = useState(route?.params || {
     title: '加载中...',
     content: '文章内容加载中...',

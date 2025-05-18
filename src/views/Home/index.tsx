@@ -4,8 +4,12 @@ import { View, Text } from '@ant-design/react-native';
 import React from 'react';
 import BackToItem, { HomeListItemProps } from '../../components/BackToItem';
 import NoteListItem from '../../components/NoteListItem';
+import useAuthGuard from '../../hooks/useAuthGuard';
 
 const Home: React.FC = () => {
+  // 调用认证守卫钩子
+  useAuthGuard();
+
   const mockBackToData: HomeListItemProps[] = [
     {
       title: '大二下工作安排',

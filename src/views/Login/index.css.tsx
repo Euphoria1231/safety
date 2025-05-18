@@ -11,16 +11,6 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     justifyContent: 'flex-start',
   },
-  backButton: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    zIndex: 10,
-  },
-  backButtonText: {
-    color: '#969696',
-    fontSize: 24,
-  },
   LoginTitleContainer: {
     marginBottom: 30,
   },

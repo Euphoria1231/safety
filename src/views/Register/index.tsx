@@ -35,14 +35,6 @@ const Register: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
 
-      {/* 返回按钮 */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.backButtonText}>{'<'}</Text>
-      </TouchableOpacity>
-
       <View style={styles.content}>
         <View style={styles.registerTitleContainer}>
           <Text style={styles.registerTitleText}>注册新账号</Text>

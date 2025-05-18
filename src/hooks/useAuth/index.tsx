@@ -31,7 +31,6 @@ const useAuth = () => {
 
   const logout = async () => {
     if (state.token) {
-      console.log(state.token);
       postLogout(state.token).then(() => {
         dispatch({
           type: 'LOGOUT',
@@ -41,9 +40,11 @@ const useAuth = () => {
         Toast.fail(err.message);
       });
     }
-    return Promise.reject({
-      message: '未登录，无法退出',
-    });
+    else {
+      return Promise.reject({
+        message: '未登录，无法退出',
+      });
+    }
   };
 
   useEffect(() => {

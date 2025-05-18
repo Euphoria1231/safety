@@ -6,8 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App.tsx';
 import useAuth from '../../hooks/useAuth/index.tsx';
 import { AuthContext } from '../../contexts/Auth/index.tsx';
+import useAuthGuard from '../../hooks/useAuthGuard';
 
 const User: React.FC = () => {
+  // 调用认证守卫钩子
+  useAuthGuard();
+
   const navigation = useNavigation<HomeNavigationProps>();
   const { logout } = useAuth();
   const [logoutModalVisible, setLogoutModalVisible] = React.useState(false);

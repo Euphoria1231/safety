@@ -10,7 +10,7 @@ const useAuthService = () => {
   };
 
   const postLogout = (token: string) => {
-    return request('post', '/auth/logout', {
+    return request('post', '/auth/logout', null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

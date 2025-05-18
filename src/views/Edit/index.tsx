@@ -2,8 +2,12 @@ import { SafeAreaView, StatusBar, TouchableOpacity, KeyboardAvoidingView, Platfo
 import styles from './index.css';
 import { View, Icon, Input } from '@ant-design/react-native';
 import React, { useState, useRef } from 'react';
+import useAuthGuard from '../../hooks/useAuthGuard';
 // TODO: 更换为富文本编辑器
 const Edit: React.FC = () => {
+  // 调用认证守卫钩子
+  useAuthGuard();
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [_isFocused, setIsFocused] = useState(false);
