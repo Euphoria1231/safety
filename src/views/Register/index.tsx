@@ -3,10 +3,33 @@ import { TextInput, TouchableOpacity, SafeAreaView, StatusBar } from 'react-nati
 import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App';
 import styles from './index.css';
-import { View, Text } from '@ant-design/react-native';
+import { View, Text, Toast } from '@ant-design/react-native';
+import useAuth from '../../hooks/useAuth';
 const Register: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
   const [agreed, setAgreed] = useState(false);
+
+  const { register } = useAuth();
+
+  const [account, setAccount] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      Toast.fail('两次密码不一致');
+      return;
+    }
+    register({
+      account,
+      password,
+    }).then(() => {
+      Toast.success('注册成功');
+      navigation.navigate('MainTabs');
+    }).catch(err => {
+      Toast.fail(err.message);
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,24 +55,24 @@ const Register: React.FC = () => {
             placeholder="请输入手机号"
             placeholderTextColor="#999999"
             keyboardType="phone-pad"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="请输入验证码"
-            placeholderTextColor="#999999"
-            keyboardType="number-pad"
+            value={account}
+            onChangeText={setAccount}
           />
           <TextInput
             style={styles.input}
             placeholder="请设置密码"
             placeholderTextColor="#999999"
             secureTextEntry
+            value={password}
+            onChangeText={setPassword}
           />
           <TextInput
             style={styles.input}
             placeholder="请确认密码"
             placeholderTextColor="#999999"
             secureTextEntry
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
           />
         </View>
 
@@ -80,6 +103,7 @@ const Register: React.FC = () => {
             !agreed && { opacity: 0.5 },
           ]}
           disabled={!agreed}
+          onPress={handleRegister}
         >
           <Text style={styles.registerButtonText}>注册</Text>
         </TouchableOpacity>

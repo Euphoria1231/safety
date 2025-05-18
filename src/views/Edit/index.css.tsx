@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     height: 60,
     fontSize: 24,
-    fontWeight: 600
+    fontWeight: 600,
   },
   contentContainer: {
     flex: 1,

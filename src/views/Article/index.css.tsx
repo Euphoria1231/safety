@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   authorInfo: {
     marginLeft: 10,
     paddingTop: 20,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
   },
   authorDate: {
     fontSize: 14,
