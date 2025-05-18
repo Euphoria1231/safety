@@ -16,7 +16,7 @@ const AuthReducer = (state: IAuthState, action: AuthAction): IAuthState => {
     case 'LOGIN':
       return { ...state, ...action.payload };
     case 'LOGOUT':
-      return { ...state, is_logged_in: false };
+      return { ...state, is_logged_in: false, token: undefined };
     default:
       return state;
   }

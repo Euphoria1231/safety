@@ -19,7 +19,7 @@ const Login: React.FC = () => {
     login({
       account,
       password,
-    }).then((res) => {
+    }).then(() => {
       Toast.success('登录成功');
       navigation.navigate('MainTabs');
     }).catch(err => {

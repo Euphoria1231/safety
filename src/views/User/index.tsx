@@ -1,12 +1,31 @@
 import { Image, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import styles from './index.css.tsx';
-import { View, Text, Icon } from '@ant-design/react-native';
+import { View, Text, Icon, Modal, Toast } from '@ant-design/react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App.tsx';
+import useAuth from '../../hooks/useAuth/index.tsx';
 
 const User: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
+  const { logout } = useAuth();
+  const [logoutModalVisible, setLogoutModalVisible] = React.useState(false);
+
+  const handleLogout = () => {
+    setLogoutModalVisible(true);
+  };
+
+  const confirmLogout = () => {
+    logout().then(() => {
+      setLogoutModalVisible(false);
+      Toast.success('退出成功');
+      navigation.navigate('Login');
+    }).catch((err) => {
+      console.log(err);
+      Toast.fail(err.message);
+    });
+  };
+
   // 用户可操作的选项列表
   const userOptions = [
     {
@@ -27,7 +46,7 @@ const User: React.FC = () => {
     {
       title: '退出登录',
       icon: 'logout' as const,
-      onPress: () => navigation.navigate('Login'),
+      onPress: handleLogout,
     },
 
   ];
@@ -66,6 +85,31 @@ const User: React.FC = () => {
           </View>
         </View>
       </View>
+
+      <Modal
+        visible={logoutModalVisible}
+        transparent
+        maskClosable
+        onClose={() => setLogoutModalVisible(false)}
+        title="确定要退出登录吗？"
+      >
+        <View style={styles.modalContent}>
+          <View style={styles.modalButtons}>
+            <TouchableOpacity
+              style={[styles.modalButton, styles.cancelButton]}
+              onPress={() => setLogoutModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>取消</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.modalButton, styles.confirmButton]}
+              onPress={confirmLogout}
+            >
+              <Text style={styles.confirmButtonText}>退出登录</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };

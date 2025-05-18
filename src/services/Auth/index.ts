@@ -9,8 +9,12 @@ const useAuthService = () => {
     return request('post', '/auth/register', data);
   };
 
-  const postLogout = () => {
-    return request('post', '/auth/logout');
+  const postLogout = (token: string) => {
+    return request('post', '/auth/logout', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   };
 
   return {
