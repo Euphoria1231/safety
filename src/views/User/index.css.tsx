@@ -108,6 +108,100 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  editButton: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    zIndex: 10,
+  },
+  editIcon: {
+    fontSize: 20,
+    color: '#333',
+  },
+  drawerContent: {
+    flex: 1,
+    paddingTop: 50,
+    paddingHorizontal: 20,
+    backgroundColor: '#fff',
+  },
+  drawerHeader: {
+    marginBottom: 30,
+    alignItems: 'center',
+  },
+  drawerTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#333',
+  },
+  avatarContainer: {
+    height: '25%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 30,
+  },
+  drawerAvatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+  },
+  avatarUploadOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: 20,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cameraIcon: {
+    fontSize: 18,
+    color: '#fff',
+  },
+  uploadText: {
+    fontSize: 12,
+    color: '#fff',
+    marginTop: 5,
+    textAlign: 'center',
+  },
+  formContainer: {
+    marginTop: 20,
+  },
+  inputItem: {
+    marginBottom: 15,
+  },
+  inputWrapper: {
+    marginBottom: 15,
+  },
+  inputLabel: {
+    fontSize: 14,
+    color: '#666666',
+    marginBottom: 5,
+  },
+  drawerFooter: {
+    marginTop: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  saveButton: {
+    flex: 1,
+    marginRight: 10,
+  },
+  drawerCancelButton: {
+    flex: 1,
+  },
 });
 
 export default styles;

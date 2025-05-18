@@ -22,6 +22,7 @@ const useAuth = () => {
 
   const register = async (data: RegisterReq) => {
     const res = await postRegister(data);
+
     dispatch({
       type: 'LOGIN',
       payload: res.data,

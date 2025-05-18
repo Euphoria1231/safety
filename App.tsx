@@ -11,6 +11,9 @@ import User from './src/views/User';
 import Search from './src/views/Search';
 import Article from './src/views/Article';
 import { Icon, Provider } from '@ant-design/react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
+import { AuthProvider } from './src/contexts/Auth';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -103,12 +106,22 @@ const RootStack = () => {
 
 function App(): React.JSX.Element {
   return (
-    <Provider>
-      <NavigationContainer>
-        <RootStack />
-      </NavigationContainer>
-    </Provider>
+    <GestureHandlerRootView style={styles.container}>
+      <Provider>
+        <NavigationContainer>
+          <AuthProvider>
+            <RootStack />
+          </AuthProvider>
+        </NavigationContainer>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default App;
