@@ -44,7 +44,7 @@ const Register: React.FC = () => {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="请输入手机号"
+            placeholder="请输入用户名"
             placeholderTextColor="#999999"
             keyboardType="phone-pad"
             value={account}

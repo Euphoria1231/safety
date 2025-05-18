@@ -6,15 +6,17 @@ import styles from './BrainLogin.css';
 import { DocumentPickerResponse, pick } from '@react-native-documents/picker';
 
 import { View, Text } from '@ant-design/react-native';
+import useAuth from '../../hooks/useAuth';
 const BrainLogin: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
   const [fileInfo, setFileInfo] = useState<DocumentPickerResponse | null>(null);
   const [authenticating, setAuthenticating] = useState(false);
   const [authStatus, setAuthStatus] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
 
-  // 模拟文件选择功能
+  const { brainLogin } = useAuth();
+
+  // 文件选择功能
   const handleFileUpload = () => {
-    // 使用Alert模拟文件选择器
     Alert.alert(
       '选择脑波数据文件',
       '请选择要上传的脑波数据文件',
@@ -26,7 +28,6 @@ const BrainLogin: React.FC = () => {
             try {
               const [pickResult] = await pick();
               setFileInfo(pickResult);
-              console.log(pickResult);
             } catch (error) {
               console.log(error);
             }
@@ -36,44 +37,34 @@ const BrainLogin: React.FC = () => {
     );
   };
 
-  // 模拟认证过程
-  const handleAuthenticate = () => {
+  // 认证过程
+  const handleAuthenticate = async () => {
     if (!fileInfo) {
       Alert.alert('请选择脑波数据文件');
       return;
     }
-
+    console.log(fileInfo);
     setAuthenticating(true);
     setAuthStatus('processing');
 
-    // 模拟认证过程时间
-    setTimeout(() => {
-      // 模拟70%成功率
-      const success = Math.random() > 0.3;
-
+    try {
+      await brainLogin(fileInfo);
+      setAuthStatus('success');
+      setTimeout(() => {
+        navigation.navigate('MainTabs');
+      }, 1500);
+    } catch (err) {
+      console.error(err);
+      setAuthStatus('failed');
+      Alert.alert('认证失败', '请检查您的脑波数据文件是否正确');
+    } finally {
       setAuthenticating(false);
-      setAuthStatus(success ? 'success' : 'failed');
-
-      if (success) {
-        // 模拟登录成功后跳转
-        setTimeout(() => {
-          navigation.navigate('Home');
-        }, 1000);
-      }
-    }, 3000);
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
-
-      {/* 返回按钮 */}
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.backButtonText}>{'<'}</Text>
-      </TouchableOpacity>
 
       <View style={styles.content}>
         <View style={styles.titleContainer}>

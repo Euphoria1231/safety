@@ -15,7 +15,7 @@ const useAuthGuard = () => {
         CommonActions.reset({
           index: 0,
           routes: [
-            { name: 'Login' },
+            { name: 'BrainLogin' },
           ],
         })
       );

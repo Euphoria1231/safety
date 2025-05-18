@@ -3,6 +3,8 @@ import { AuthContext } from '../../contexts/Auth';
 import useAuthService from '../../services/Auth';
 import { LoginReq, RegisterReq } from '../../services/Auth/type';
 import { Toast } from '@ant-design/react-native';
+import { DocumentPickerResponse } from '@react-native-documents/picker';
+import { Platform } from 'react-native';
 const useAuth = () => {
   const { state, dispatch } = useContext(AuthContext);
 
@@ -10,6 +12,7 @@ const useAuth = () => {
     postLogin,
     postRegister,
     postLogout,
+    postBrainLogin,
   } = useAuthService();
 
   const login = async (data: LoginReq) => {
@@ -47,6 +50,47 @@ const useAuth = () => {
     }
   };
 
+  const brainLogin = async (file: DocumentPickerResponse) => {
+    const formData = new FormData();
+    if (!file.uri || !file.name || !file.size || !file.type) {
+      return Promise.reject({
+        message: '文件不存在',
+      });
+    }
+    // 创建文件对象，符合后端要求
+    const fileObject = {
+      uri: Platform.OS === 'android' ? file.uri : file.uri.replace('file:///', ''),
+      type: file.type || 'application/octet-stream',
+      name: file.name || 'brain_wave_file',
+    };
+
+    // 添加到FormData
+    formData.append('brain_wave_file', fileObject as any);
+    if (!formData) {
+      return Promise.reject({
+        message: '文件不存在',
+      });
+    }
+    console.log(formData);
+    try {
+      const res = await postBrainLogin(formData);
+      console.log('脑波登录成功', res);
+      if (res && res.data) {
+        dispatch({
+          type: 'LOGIN',
+          payload: res.data,
+        });
+        return res;
+      } else {
+        throw new Error('服务器响应格式错误');
+      }
+    } catch (err: any) {
+      console.log('脑波登录失败', err);
+      Toast.fail(err.message || '登录失败');
+      throw err;
+    }
+  };
+
   useEffect(() => {
     console.log(state);
   }, [state]);
@@ -54,6 +98,7 @@ const useAuth = () => {
     login,
     register,
     logout,
+    brainLogin,
   };
 };
 

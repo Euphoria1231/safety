@@ -31,3 +31,19 @@ export interface RegisterReq {
 }
 
 export type RegisterRes = IResponse<LoginResItem>;
+
+export interface BrainLoginRes {
+  code: number;
+  data: BrainLoginResItem;
+  is_new_user: boolean;
+  message: string;
+  [property: string]: any;
+}
+
+export interface BrainLoginResItem {
+  default_password?: string;
+  is_logged_in: boolean;
+  token: string;
+  user: User;
+  [property: string]: any;
+}
