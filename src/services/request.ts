@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 // 创建axios实例(默认配置)
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://10.78.172.78:5000/api',
   timeout: 10000,
 });
 // 拦截器
@@ -23,7 +23,6 @@ instance.interceptors.request.use(
 // 添加响应拦截器
 instance.interceptors.response.use(
   function (response) {
-    console.log(response.data);
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     if (response.data) {

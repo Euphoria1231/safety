@@ -19,13 +19,14 @@ const User: React.FC = () => {
   const [username, setUsername] = useState('ZCharles');
   const [email, setEmail] = useState('zcharles@example.com');
   const [avatar, setAvatar] = useState(require('../../assets/images/avatar.jpg'));
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const { user } = state;
-
+  const { updateUserInfo } = useAuth();
   useEffect(() => {
     if (user) {
       setUsername(user.username);
-      console.log(user);
+      setEmail(user.email || '');
+      console.log('用户信息', user);
     }
   }, [user]);
 
@@ -53,9 +54,25 @@ const User: React.FC = () => {
   };
 
   const handleSaveProfile = () => {
-    // 这里添加保存用户资料的逻辑
-    Toast.success('个人资料已更新');
-    closeDrawer();
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('email', email);
+    updateUserInfo(formData).then(() => {
+      // 使用 dispatch 更新全局状态
+      if (user) {
+        const updatedUser = {
+          ...user,
+          username: username,
+          email: email
+        };
+        dispatch({ type: 'SET_USER', payload: updatedUser });
+      }
+      Toast.success('个人资料已更新');
+      closeDrawer();
+    }).catch((err) => {
+      console.log(err);
+      Toast.fail(err.message);
+    });
   };
 
   const handleSelectImage = () => {
@@ -74,12 +91,12 @@ const User: React.FC = () => {
     {
       title: '修改密码',
       icon: 'lock' as const,
-      onPress: () => navigation.navigate('Login'),
+      onPress: () => navigation.navigate('ChangePassword'),
     },
     {
       title: '修改脑电波文件',
       icon: 'file' as const,
-      onPress: () => navigation.navigate('BrainLogin'),
+      onPress: () => navigation.navigate('ModifyBrainWave'),
     },
     {
       title: '切换账号',
@@ -180,8 +197,8 @@ const User: React.FC = () => {
               style={styles.avatar}
               source={avatar}
             />
-            <Text style={styles.username}>{username}</Text>
-            <Text style={styles.email}>{email}</Text>
+            <Text style={styles.username}>{user?.username}</Text>
+            <Text style={styles.email}>{user?.email}</Text>
           </View>
 
           {/* 下半部分：用户操作 */}

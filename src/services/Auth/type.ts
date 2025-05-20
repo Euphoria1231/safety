@@ -13,9 +13,9 @@ export interface LoginResItem {
 }
 
 export interface User {
-  avatar: null;
+  avatar: string | null;
   created_at: string;
-  email: null;
+  email: string | null;
   has_brain_wave: boolean;
   id: number;
   updated_at: string;
@@ -47,3 +47,17 @@ export interface BrainLoginResItem {
   user: User;
   [property: string]: any;
 }
+
+export type UserRes = IResponse<{
+  user: User;
+}>;
+
+export type UpdateUserInfoReq = FormData;
+
+export type UpdateUserInfoRes = IResponse<User>;
+
+export type ChangePasswordReq = {
+  old_password: string;
+  new_password: string;
+}
+

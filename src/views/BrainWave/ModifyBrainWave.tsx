@@ -1,25 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { TouchableOpacity, SafeAreaView, StatusBar, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { HomeNavigationProps } from '../../types/App';
-import styles from './BrainLogin.css';
+import styles from './ModifyBrainWave.css.tsx';
 import { DocumentPickerResponse, pick } from '@react-native-documents/picker';
 
-import { View, Text } from '@ant-design/react-native';
+import { View, Text, Toast } from '@ant-design/react-native';
 import useAuth from '../../hooks/useAuth';
-const BrainLogin: React.FC = () => {
+import { AuthContext } from '../../contexts/Auth';
+
+const ModifyBrainWave: React.FC = () => {
   const navigation = useNavigation<HomeNavigationProps>();
   const [fileInfo, setFileInfo] = useState<DocumentPickerResponse | null>(null);
-  const [authenticating, setAuthenticating] = useState(false);
-  const [authStatus, setAuthStatus] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
+  const [uploading, setUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'processing' | 'success' | 'failed'>('idle');
+  const { state } = useContext(AuthContext);
+  const { user } = state;
 
-  const { brainLogin } = useAuth();
+  const { updateBrainWave } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      navigation.navigate('Login');
+    }
+  }, [user, navigation]);
 
   // 文件选择功能
   const handleFileUpload = () => {
     Alert.alert(
       '选择脑波数据文件',
-      '请选择要上传的脑波数据文件',
+      '请选择要上传的新脑波数据文件',
       [
         { text: '取消', style: 'cancel' },
         {
@@ -37,28 +47,30 @@ const BrainLogin: React.FC = () => {
     );
   };
 
-  // 认证过程
-  const handleAuthenticate = async () => {
+  // 上传处理
+  const handleUpdateBrainWave = async () => {
     if (!fileInfo) {
       Alert.alert('请选择脑波数据文件');
       return;
     }
-    console.log(fileInfo);
-    setAuthenticating(true);
-    setAuthStatus('processing');
+
+    setUploading(true);
+    setUploadStatus('processing');
 
     try {
-      await brainLogin(fileInfo);
-      setAuthStatus('success');
+      // 这里使用现有的brainLogin方法，实际项目中应当创建专门的更新方法
+      await updateBrainWave(fileInfo);
+      setUploadStatus('success');
+      Toast.success('脑波数据更新成功');
       setTimeout(() => {
-        navigation.navigate('MainTabs');
+        navigation.goBack();
       }, 1500);
     } catch (err) {
       console.error(err);
-      setAuthStatus('failed');
-      Alert.alert('认证失败', '请检查您的脑波数据文件是否正确');
+      setUploadStatus('failed');
+      Alert.alert('更新失败', '请检查您的脑波数据文件是否正确');
     } finally {
-      setAuthenticating(false);
+      setUploading(false);
     }
   };
 
@@ -67,17 +79,16 @@ const BrainLogin: React.FC = () => {
       <StatusBar barStyle="light-content" backgroundColor="#000000" />
 
       <View style={styles.content}>
+
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>脑波认证登录</Text>
+          <Text style={styles.titleText}>更新脑波数据</Text>
           <Text style={styles.subtitleText}>Mind Guardian</Text>
         </View>
 
         {/* 脑波视觉元素 */}
         <View style={styles.brainwaveContainer}>
           <View style={styles.brainImageContainer}>
-            {/* 模拟脑电波动画 */}
-            <View style={[styles.brainAnimation, authStatus === 'processing' && styles.animating]}>
-              {/* 模拟脑电波线条 */}
+            <View style={[styles.brainAnimation, uploadStatus === 'processing' && styles.animating]}>
               {[1, 2, 3, 4, 5].map(i => (
                 <View key={i} style={[
                   styles.brainwave,
@@ -86,7 +97,7 @@ const BrainLogin: React.FC = () => {
                       i === 3 ? styles.wave3 :
                         i === 4 ? styles.wave4 :
                           styles.wave5,
-                  authStatus === 'processing' && styles.pulsingWave,
+                  uploadStatus === 'processing' && styles.pulsingWave,
                 ]} />
               ))}
             </View>
@@ -95,14 +106,14 @@ const BrainLogin: React.FC = () => {
           <View style={styles.statusContainer}>
             <Text style={[
               styles.statusText,
-              authStatus === 'processing' && styles.processingText,
-              authStatus === 'success' && styles.successText,
-              authStatus === 'failed' && styles.failedText,
+              uploadStatus === 'processing' && styles.processingText,
+              uploadStatus === 'success' && styles.successText,
+              uploadStatus === 'failed' && styles.failedText,
             ]}>
-              {authStatus === 'idle' && '等待脑波数据上传'}
-              {authStatus === 'processing' && '正在分析脑波模式...'}
-              {authStatus === 'success' && '认证成功！欢迎回来'}
-              {authStatus === 'failed' && '认证失败，请重试'}
+              {uploadStatus === 'idle' && '等待选择新的脑波数据文件'}
+              {uploadStatus === 'processing' && '正在更新脑波数据...'}
+              {uploadStatus === 'success' && '更新成功！'}
+              {uploadStatus === 'failed' && '更新失败，请重试'}
             </Text>
           </View>
         </View>
@@ -112,10 +123,10 @@ const BrainLogin: React.FC = () => {
           <TouchableOpacity
             style={styles.uploadButton}
             onPress={handleFileUpload}
-            disabled={authenticating}
+            disabled={uploading}
           >
             <Text style={styles.uploadButtonText}>
-              {fileInfo ? '重新选择脑波文件' : '选择脑波数据文件'}
+              {fileInfo ? '重新选择脑波文件' : '选择新的脑波数据文件'}
             </Text>
           </TouchableOpacity>
 
@@ -127,34 +138,26 @@ const BrainLogin: React.FC = () => {
           )}
         </View>
 
-        {/* 认证按钮 */}
+        {/* 更新按钮 */}
         <TouchableOpacity
           style={[
-            styles.authButton,
-            (!fileInfo || authenticating) && { opacity: 0.5 },
-            authStatus === 'success' && styles.successButton,
-            authStatus === 'failed' && styles.failedButton,
+            styles.updateButton,
+            (!fileInfo || uploading) && { opacity: 0.5 },
+            uploadStatus === 'success' && styles.successButton,
+            uploadStatus === 'failed' && styles.failedButton,
           ]}
-          disabled={!fileInfo || authenticating}
-          onPress={handleAuthenticate}
+          disabled={!fileInfo || uploading}
+          onPress={handleUpdateBrainWave}
         >
-          <Text style={styles.authButtonText}>
-            {authenticating ? '认证中...' : '开始脑波认证'}
+          <Text style={styles.updateButtonText}>
+            {uploading ? '更新中...' : '更新脑波数据'}
           </Text>
         </TouchableOpacity>
 
-        {/* 底部文字 */}
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>没有脑波档案? 登录时即为您注册</Text>
-          <View style={styles.footerLinks}>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.linkText}>使用账号密码登录</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+
       </View>
     </SafeAreaView>
   );
 };
 
-export default BrainLogin;
+export default ModifyBrainWave; 

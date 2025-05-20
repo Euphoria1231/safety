@@ -8,18 +8,18 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 30,
-    paddingTop: 100,
+    paddingTop: 80,
     justifyContent: 'flex-start',
   },
   backButton: {
     position: 'absolute',
-    top: 60,
+    top: 20,
     left: 20,
     zIndex: 10,
   },
   backButtonText: {
     color: '#969696',
-    fontSize: 24,
+    fontSize: 18,
   },
   titleContainer: {
     marginBottom: 30,
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   },
   brainwaveContainer: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 25,
   },
   brainImageContainer: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+    width: 150,
+    height: 150,
+    borderRadius: 75,
     backgroundColor: '#F2F2F2',
     justifyContent: 'center',
     alignItems: 'center',
@@ -67,28 +67,28 @@ const styles = StyleSheet.create({
   },
   wave1: {
     width: '60%',
-    transform: [{ translateY: -40 }],
+    transform: [{ translateY: -30 }],
   },
   wave2: {
     width: '70%',
-    transform: [{ translateY: -20 }],
+    transform: [{ translateY: -15 }],
   },
   wave3: {
     width: '80%',
   },
   wave4: {
     width: '70%',
-    transform: [{ translateY: 20 }],
+    transform: [{ translateY: 15 }],
   },
   wave5: {
     width: '60%',
-    transform: [{ translateY: 40 }],
+    transform: [{ translateY: 30 }],
   },
   pulsingWave: {
     backgroundColor: '#FE2C55',
   },
   statusContainer: {
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -109,13 +109,38 @@ const styles = StyleSheet.create({
     color: '#FE2C55',
     fontWeight: '600',
   },
+  currentFileContainer: {
+    backgroundColor: '#F0F4F9',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+  },
+  currentFileText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#333',
+    marginBottom: 10,
+  },
+  currentFileStatus: {
+    paddingHorizontal: 5,
+  },
+  currentFileStatusText: {
+    fontSize: 15,
+    color: '#11467C',
+    fontWeight: '500',
+  },
+  currentFileDetailText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
   uploadContainer: {
     marginBottom: 20,
   },
   uploadButton: {
     backgroundColor: '#F9F9F9',
     height: 50,
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 10,
@@ -130,21 +155,21 @@ const styles = StyleSheet.create({
   fileInfoContainer: {
     backgroundColor: '#F5F5F5',
     padding: 10,
-    borderRadius: 4,
+    borderRadius: 8,
   },
   fileNameText: {
     color: '#666666',
     fontSize: 14,
   },
-  authButton: {
-    backgroundColor: '#FE2C55',
+  updateButton: {
+    backgroundColor: '#11467C',
     height: 50,
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 15,
   },
-  authButtonText: {
+  updateButtonText: {
     color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
@@ -156,25 +181,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#FE2C55',
   },
   footer: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 20,
   },
   footerText: {
     color: '#999999',
     fontSize: 14,
-    marginBottom: 10,
-  },
-  footerLinks: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  linkText: {
-    color: '#11467CAA',
-    fontSize: 14,
-    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
-export default styles;
+export default styles; 

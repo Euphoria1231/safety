@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Register from './src/views/Register';
 import Login from './src/views/Login';
 import BrainLogin from './src/views/Login/BrainLogin';
+import ModifyBrainWave from './src/views/BrainWave/ModifyBrainWave';
+import ChangePassword from './src/views/ChangePassword';
 import Edit from './src/views/Edit';
 import User from './src/views/User';
 import Search from './src/views/Search';
@@ -91,6 +93,14 @@ const RootStack = () => {
       <Stack.Screen
         name="BrainLogin"
         component={BrainLogin}
+      />
+      <Stack.Screen
+        name="ModifyBrainWave"
+        component={ModifyBrainWave}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
       />
       <Stack.Screen
         name="Login"

@@ -7,6 +7,8 @@ export type RootStackPropsList = {
   Register: undefined;
   Login: undefined;
   BrainLogin: undefined;
+  ModifyBrainWave: undefined;
+  ChangePassword: undefined;
   Article: {
     articleId: string;
     title?: string;
