@@ -1,4 +1,5 @@
 建议用真机链接，要打开开发者模式，具体的步骤百度一下你就知道
+
 首先拉取项目，输入 npm install 安装依赖
 
 后端地址估计要改，根据 flask 的提示修改 baseURL（第三个），修改src\services\request.ts的 baseURL，（第三个）/api
