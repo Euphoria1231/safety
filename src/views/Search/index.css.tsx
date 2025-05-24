@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 20,
     justifyContent: 'space-between',
+    overflow: 'visible',
   },
   searchContainer: {
     flexDirection: 'row',
@@ -48,11 +49,39 @@ const styles = StyleSheet.create({
 
   SearchNoteListContainer: {
     flex: 1,
+    overflow: 'visible',
   },
   SearchNoteListWrapper: {
     gap: 15,
+    paddingBottom: 20,
   },
-  
+
+  // 排序菜单样式
+  sortModalContainer: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+  },
+  sortModalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  sortOption: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F1F1F1',
+  },
+  sortOptionText: {
+    fontSize: 16,
+    color: '#333',
+  },
 });
 
 export default styles;

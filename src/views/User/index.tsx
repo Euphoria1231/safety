@@ -63,7 +63,7 @@ const User: React.FC = () => {
         const updatedUser = {
           ...user,
           username: username,
-          email: email
+          email: email,
         };
         dispatch({ type: 'SET_USER', payload: updatedUser });
       }

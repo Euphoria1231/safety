@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    height: '100%',
     backgroundColor: '#FFF',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -113,6 +114,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#333',
     lineHeight: 24,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#007AFF',
   },
 });
 

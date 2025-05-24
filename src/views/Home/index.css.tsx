@@ -47,7 +47,7 @@ const style = StyleSheet.create({
   },
   mainContent: {
     flex: 1,
-    overflow: 'hidden',
+    overflow: 'visible',
     gap: 30,
   },
   titleText: {
@@ -64,11 +64,13 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
   noteListContainer: {
+    flex: 1,
     gap: 10,
     flexDirection: 'column',
   },
   noteListWrapper: {
     gap: 10,
+    paddingBottom: 20,
   },
 });
 

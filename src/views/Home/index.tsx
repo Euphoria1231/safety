@@ -2,59 +2,16 @@ import { FlatList, Image, SafeAreaView, StatusBar, TouchableOpacity } from 'reac
 import styles from './index.css';
 import { View, Text } from '@ant-design/react-native';
 import React from 'react';
-import BackToItem, { HomeListItemProps } from '../../components/BackToItem';
+import BackToItem from '../../components/BackToItem';
 import NoteListItem from '../../components/NoteListItem';
 import useAuthGuard from '../../hooks/useAuthGuard';
+import useNote from '../../hooks/useNote';
 
 const Home: React.FC = () => {
   // 调用认证守卫钩子
   useAuthGuard();
-
-  const mockBackToData: HomeListItemProps[] = [
-    {
-      title: '大二下工作安排',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1001',
-    },
-    {
-      title: '计算机设计大赛',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1002',
-    },
-    {
-      title: '服务外包比赛',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1003',
-    },
-    {
-      title: '学习计划安排',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1004',
-    },
-  ];
-
-  const mockNoteData: HomeListItemProps[] = [
-    {
-      title: '大二下工作安排',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1001',
-    },
-    {
-      title: '计算机设计大赛',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1002',
-    },
-    {
-      title: '服务外包比赛',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1003',
-    },
-    {
-      title: '学习计划安排',
-      imageUrl: '../../assets/images/avatar.jpg',
-      articleId: '1004',
-    },
-  ];
+  // 获取笔记列表和刷新函数
+  const { noteList, refreshNoteList, loading, deleteNoteById } = useNote();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -86,12 +43,12 @@ const Home: React.FC = () => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.backToItemWrapper}
-              data={mockBackToData}
+              data={noteList}
               renderItem={({ item }) =>
                 <BackToItem
                   title={item.title}
-                  imageUrl={item.imageUrl}
-                  articleId={item.articleId}
+                  imageUrl={item.background_image || '../../assets/images/avatar.jpg'}
+                  articleId={item.id || item.articleId}
                 />
               }
             />
@@ -101,14 +58,19 @@ const Home: React.FC = () => {
               <Text style={styles.titleText} >笔记列表</Text>
             </View>
             <FlatList
-              data={mockNoteData}
+              style={{ flex: 1 }}
+              data={noteList}
               renderItem={({ item }) =>
                 <NoteListItem
                   title={item.title}
-                  imageUrl={item.imageUrl}
-                  articleId={item.articleId}
+                  imageUrl={item.background_image || '../../assets/images/avatar.jpg'}
+                  articleId={item.id || item.articleId}
+                  onDelete={deleteNoteById}
                 />}
               contentContainerStyle={styles.noteListWrapper}
+              keyExtractor={item => item.id.toString()}
+              refreshing={loading}
+              onRefresh={refreshNoteList}
             />
           </View>
         </View>
