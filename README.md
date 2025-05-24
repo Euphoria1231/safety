@@ -6,4 +6,5 @@
 
 ![image](https://github.com/user-attachments/assets/cffcf095-00cd-4356-a524-02bbfa2b04b2)
 然后输入 npx react-native run-android 启动项目
-参考教程 https://reactnative.cn/docs/running-on-device
+
+参考教程 https://reactnative.cn/docs/running-on-device 和 https://reactnative.cn/docs/environment-setup
